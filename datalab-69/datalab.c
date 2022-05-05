@@ -25,11 +25,35 @@ long absVal(long x){
 long addOK(long x,long y){
     return (((x^y)>>63)|(~(x^(x+y)>>63)))&1;
 }
-int main(){
-    for(long x=0;x!=LONG_MAX;x++)
-        if(x!=absVal(x))
-            printf("wrong\n");
-
+/*
+- 判断一个二进制数偶数位是否全为1
+- 示例：allEvenBits(0xFFFFFFFD) = 0
+- 限制操作：! ~ & ^ | + << >>
+- 操作数量：12
+- 难度：2
+*/
+long allEvenBits(long x){
+    long mask=(0x55<<8)|0x55;
+    mask=(mask<<16)|mask;
+    mask=(mask<<32)|mask;
+    return !((x&mask)^mask);
+}
+int allOddBits(int x) {
+  long mask=(0xAA<<8)|0xAA;
+    mask=(mask<<16)|mask;
+    mask=(mask<<32)|mask;
+    return !((x&mask)^mask);
 
 }
-
+int anayEvenBits(int x) {
+  long mask=(0xAA<<8)|0xAA;
+    mask=(mask<<16)|mask;
+    mask=(mask<<32)|mask;
+    return !!(x&mask);
+}
+int anayOddBits(int x) {
+  long mask=(0xAA<<8)|0xAA;
+    mask=(mask<<16)|mask;
+    mask=(mask<<32)|mask;
+    return !!(x&mask);
+}
