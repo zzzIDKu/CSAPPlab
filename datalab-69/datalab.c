@@ -38,22 +38,25 @@ long allEvenBits(long x){
     mask=(mask<<32)|mask;
     return !((x&mask)^mask);
 }
-int allOddBits(int x) {
+long allOddBits(long x) {
   long mask=(0xAA<<8)|0xAA;
     mask=(mask<<16)|mask;
     mask=(mask<<32)|mask;
     return !((x&mask)^mask);
 
 }
-int anayEvenBits(int x) {
+long anayEvenBits(long x) {
   long mask=(0xAA<<8)|0xAA;
     mask=(mask<<16)|mask;
     mask=(mask<<32)|mask;
     return !!(x&mask);
 }
-int anayOddBits(int x) {
+long anayOddBits(long x) {
   long mask=(0xAA<<8)|0xAA;
     mask=(mask<<16)|mask;
     mask=(mask<<32)|mask;
     return !!(x&mask);
+}
+long bang(long x){
+  return (~((x|(x^((0x1<<63)>>63)+1))>>63))&1;
 }
