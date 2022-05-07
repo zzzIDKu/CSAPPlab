@@ -13,8 +13,8 @@
 
 $$
 x=\begin{cases}
-  \ \ \thicksim x+1,& \text{ if  x<0}\\
-  \ \ x,&\text{  if x>0}
+  \ \ \thicksim x+1,&  if\ x<0\\
+  \ \ x,&if\ x>0
 \end{cases}
 $$
 
@@ -223,11 +223,19 @@ long bang(long x){
 
 ## bitAnd
 
-- 只使用 `~`和`！`计算x&y
+- 只使用 `~`和`|`计算x&y
 - 示例：bitAnd(6,5)=4
 - 限制操作：~ |
 - 操作数量：8
 - 难度：1
+
+De Morgan's Law
+
+~~~c
+long bitAnd (long x,long y){
+  return ~(~x|~y);
+}
+~~~
 
 ## bitCount
 
@@ -236,6 +244,8 @@ long bang(long x){
 - 限制操作：! ~ & ^ | + << >>
 - 操作数量：40
 - 难度：4
+
+
 
 ## bitMask
 
