@@ -266,19 +266,30 @@ $$
 
 对于后面的情况就没有可能数量到符号位才能表示个数。
 
+上述过程每一步都要取对应的MASK。
+
 ~~~cpp
 long bitCount(long x,long y){
-  long MASK=0x5555<<16+0x5555;
-  MASK=MASK<<32+MASK;
-  long x_even_bit=x&MASK;
-  long x_odd_bit=(x>>1)&MASK;
-  long cnt_width_2=x_even_bit+x_odd_bit;
-  long cnt_width_4=(cnt_width_2>>2)+(cnt_width_2>>63)&(1<<62)+cnt_width_2;
-  long cnt_width_8=(cnt_width_4>>4)+cnt_width_4;
-  long cnt_width_16=(cnt_width_8>>8)+cnt_width_8;
-  long cnt_width_32=(cnt_width_16>>16)+cnt_width_16;
-  long cnt_width_64=(cnt_width_32>>32)+cnt_width_32;
+  long MASK_1=(0x5555<<16)|(0x5555);
+  MASK_1=(MASK_1<<32)|(MASK_1);
+  long MASK_2=(0x3333<<16)|(0x3333);
+  MASK_2=(MASK_2<<32)|MASK_2;
+  long MASK_3=(0x0f0f<<16)|(0x0f0f);
+  MASK_3=(MASK_3<<32)|MASK_3;
+  long MASK_4=(0x00ff<<16)|(0x00ff);
+  MASK_4=(MASK_4<<32)|MASK_4;
+  long MASK_5=(0xffff<<32)|(0xffff);
+  long MASK_6=(0xffff<<16);
+
+
+  long cnt_width_2=(x&MASK_1)+((x>>1)&MASK_1);
+  long cnt_width_4=(cnt_width_2>>2)&MASK_2+cnt_width_2&MASK_2;
+  long cnt_width_8=(cnt_width_4>>4)&MASK_3+cnt_width_4&MASK_3;
+  long cnt_width_16=(cnt_width_8>>8)&MASK_4+cnt_width_8&MASK_4;
+  long cnt_width_32=(cnt_width_16>>16)&MASK_5+cnt_width_16&MASK_5;
+  long cnt_width_64=(cnt_width_32>>32)&MASK_6+cnt_width_32&MASK_6;
   return cnt_width_64;
+
 }
 ~~~
 
