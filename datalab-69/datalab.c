@@ -100,3 +100,26 @@ long bang(long x){
 long bitAnd (long x,long y){
   return ~(~x|~y);
 }
+/*- 计算二进制数中1的个数
+- 示例：bitCount(7) = 3
+- 限制操作：! ~ & ^ | + << >>
+- 操作数量：40
+- 难度：4
+*/
+long bitCount(long x,long y){
+  long MASK=0x5555<<16+0x5555;
+  MASK=MASK<<32+MASK;
+  long x_even_bit=x&MASK;
+  long x_odd_bit=(x>>1)&MASK;
+  long cnt_width_2=x_even_bit+x_odd_bit;
+  long cnt_width_4=(cnt_width_2>>2)+(cnt_width_2>>63)&(1<<62)+cnt_width_2;
+  long cnt_width_8=(cnt_width_4>>4)+cnt_width_4;
+  long cnt_width_16=(cnt_width_8>>8)+cnt_width_8;
+  long cnt_width_32=(cnt_width_16>>16)+cnt_width_16;
+  long cnt_width_64=(cnt_width_32>>32)+cnt_width_32;
+  return cnt_width_64;
+
+
+
+
+}
