@@ -128,3 +128,7 @@ long bitCount(long x,long y){
   return cnt_width_64;
 
 }
+
+long bitMask(long x,long y){
+  return (((~0)<<x)&((~0)+1<<y<<1));
+}
