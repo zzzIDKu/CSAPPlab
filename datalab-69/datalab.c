@@ -129,6 +129,36 @@ long bitCount(long x,long y){
 
 }
 
+/*- 产生一个在`[lowbit,highbit]`区间内全为`1`的数，其余位为`0`
+- 示例：bitMask(5,3) = 0x38
+- 说明：0 <= lowbig <= 31，0 <= highbit <= 31，若low>high，返回0
+- 限制操作：! ~ & ^ | + << >>
+- 操作数量：16
+- 难度：3*/
 long bitMask(long x,long y){
   return (((~0)<<x)&((~0)+1<<y<<1));
+}
+/* - 产生一个掩码，表示x和y中哪些位相等。只使用`~`和`&`
+- 示例：bitMatch(0x7,0xE) = 0x6
+- 限制操作：~ &
+- 操作数量：14
+- 难度：1 */
+long bitMatch(long x,long y){
+  return (~(x&(~y))&~(~x&y));
+}
+/* - 使用`~`和`&`实现`~(x|y)`
+- 示例：bitNor(0x6,0x5) = 0xFFFFFFF8
+- 限制操作：~ &
+- 操作数量：8
+- 难度：1 */
+long bitNor(long x,long y){
+  return (~x)&(~y);
+}
+/* - 使用`~`和`&`实现`x|y`
+- 示例：bitNor(0x6,0x5) = 0x7
+- 限制操作：~ &
+- 操作数量：8
+- 难度：1 */
+long bitOr(long x,long y){
+  return ~((~x)&(~y));
 }

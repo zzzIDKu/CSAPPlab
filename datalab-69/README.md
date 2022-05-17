@@ -318,5 +318,29 @@ $$
 
 两个取与即可。
 
+~~~c
+long bitMask(long x,long y){
+  return (((~0)<<x)&((~0)+1<<y<<1));
+}
+~~~
+
+
+
+## BitMatch
+
+- 产生一个掩码，表示x和y中哪些位相等。只使用`~`和`&`
+- 示例：bitMatch(0x7,0xE) = 0x6
+- 限制操作：~ &
+- 操作数量：14
+- 难度：1
+
+同或运算。$\sim(x\oplus y)=\sim((A\&\sim B)| (B\&\sim A))=((\sim(A\&\sim B))\&(\sim(B\&\sim A)))$
+
+ ~~~c
+ long bitMatch(long x,long y){
+   return (~(x&(~y))&~(~x&y));
+ }
+ ~~~
+
 
 
