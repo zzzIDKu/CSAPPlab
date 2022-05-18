@@ -162,3 +162,17 @@ long bitNor(long x,long y){
 long bitOr(long x,long y){
   return ~((~x)&(~y));
 }
+/* - 若x中含有奇数个0返回1，反之返回0.
+- 示例：bitParity(5) = 0
+- 限制操作：! ~ & ^ | + << >>
+- 操作数量：20
+- 难度：4 */
+long bitParity(long x){
+
+  x=(x>>32)^x;
+  x=(x>>16)^x;
+  x=(x>>8)^x;
+  x=(x>>4)^x;
+  x=(x>>2)^x;
+  return ((x>>1)^x)&1;
+}
