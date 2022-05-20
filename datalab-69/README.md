@@ -410,3 +410,43 @@ long bitParity(long x){
 }
 ~~~
 
+## bitReverse
+
+- 逆序32位比特数
+- 示例：bitReverse(0x80000002) = 0x40000001
+- 限制操作：! ~ & ^ | + << >>
+- 操作数量：45
+- 难度：４
+
+也才用分治的做法，先交换$b_0,b_1$,$b_2,b_3$,...然后交换新的$b_0b1,b_2b_3$,...直到最后。
+
+证明：
+
+1. 对于$2^1$,有$b_0,b_1$显然成立得到$b_0,b_1$。
+2. 不妨假设对于$2^{k-1}$,得到的结果正确,序列为$b_0,..,b_{2^{n-1}-1}$。对于$2^n$,将其两部分分别进行对应算法可以得到以下两个序列$b_{2^{n-1}},..,b_{2^{n}-1},b_0,..,b_{2^{n-1}-1}$,再将上述两个序列逆转就有$b_0,..,b_{2^{n-1}-1},b_{2^{n-1}},..,b_{2^{n}-1}$.
+
+对于第一步将所有挨着的两位换位，偶数位先取MASK再左移，奇数位先右移再取MASK，最后取或就可以得到。其他的类似。
+
+~~~c
+long bitReverse(long x){
+  long MASK_1=(0x5555<<16)|(0x5555);
+  MASK_1=(MASK_1<<32)|(MASK_1);
+  long MASK_2=(0x3333<<16)|(0x3333);
+  MASK_2=(MASK_2<<32)|MASK_2;
+  long MASK_3=(0x0f0f<<16)|(0x0f0f);
+  MASK_3=(MASK_3<<32)|MASK_3;
+  long MASK_4=(0x00ff<<16)|(0x00ff);
+  MASK_4=(MASK_4<<32)|MASK_4;
+  long MASK_5=(0xffff<<32)|(0xffff);
+  long MASK_6=(0xffff<<16);
+  
+  long Reverse_2b=((x&MASK_1)<<1)|((x>>1)&MASK_1);
+  long Reverse_4b=((Reverse_2b&MASK_2)<<2)|((Reverse_2b>>2)&MASK_2);
+  long Reverse_8b=((Reverse_4b&MASK_3)<<4)|((Reverse_2b>>4)&MASK_3);
+  long Reverse_16b=((Reverse_8b&MASK_4)<<8)|((Reverse_8b>>8)&MASK_4);
+  long Reverse_32b=((Reverse_16b&MASK_5)<<16)|((Reverse_16b>>16)&MASK_5);
+  long Reverse_64b=((Reverse_32b&MASK_6)<<32)|((Reverse_32b>>32)&MASK_6);
+  return Reverse_64b;
+}
+~~~
+
