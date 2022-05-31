@@ -19,6 +19,7 @@ x=\begin{cases}
 $$
 
 可知
+
 $$
 X_n>>(n-1)=\begin{cases}
 &1111...1111,&x<0\\
@@ -113,10 +114,6 @@ long allEvenBits(long x){
 
 其实这道题和上道题几乎差不多。将偶位改为了奇而已。
 
-<<<<<<< HEAD
-=======
-
->>>>>>> a5eb83e (bitswap)
 $$
 0xA=10101010
 $$
@@ -263,12 +260,15 @@ long bitAnd (long x,long y){
 对于一位数，二进制位个数即当前位的值。
 
 对于二位数，二进制位个数即为两个位的值做加法。
+
 $$
 cnt_{l,r}=\begin{cases}
-&cnt_{l,x}+cnt_{x,r},& l<r\\
+&cnt_{l,x}+cnt_{x,r},&l < r\\
 &cnt_l,&l=r
 \end{cases}
 $$
+
+
 可根据动态规划思想计算所有。
 
 显然$cnt_i=b_i$
@@ -347,7 +347,8 @@ long bitMask(long x,long y){
 - 操作数量：14
 - 难度：1
 
-同或运算。$\sim(x\oplus y)=\sim((A\&\sim B)| (B\&\sim A))=((\sim(A\&\sim B))\&(\sim(B\&\sim A)))$
+同或运算。
+$\sim (x\oplus y)=\sim ((A\&\sim B)| (B\&\sim A))=((\sim (A\&\sim B))\&(\sim (B\&\sim A)))$
 
  ~~~c
  long bitMatch(long x,long y){
@@ -363,8 +364,9 @@ long bitMask(long x,long y){
 - 操作数量：8
 - 难度：1
 
+
 $$
-\sim(x|y)=\sim x\&\sim y
+\sim (x|y)= \sim x \  \& \  \sim y
 $$
 
 ~~~c
