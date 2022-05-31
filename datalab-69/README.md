@@ -113,6 +113,10 @@ long allEvenBits(long x){
 
 其实这道题和上道题几乎差不多。将偶位改为了奇而已。
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> a5eb83e (bitswap)
 $$
 0xA=10101010
 $$
@@ -120,7 +124,6 @@ $$
 $$
 0xAA<<8=10101010 \ 00000000
 $$
-
 
 
 先与MASK取与，再取异或，判断是否为0。
@@ -461,4 +464,53 @@ long bitReverse(long x){
   return Reverse_64b;
 }
 ~~~
+
+## bitXor
+
+- 使用`~`和`&`实现`x^y`
+- 示例：bitNor(0x4,0x5) = 0x1
+- 限制操作：~ &
+- 操作数量：14
+- 难度：1
+
+异或运算:
+$$
+x\oplus y=(\sim x\&y)|(x\&\sim y)=\sim((\sim(\sim x\&y))\&(\sim(x\&\sim y))
+$$
+
+
+```c
+long bitXor(long x,long y){
+  return ~((~(~ x&y))&(~(x&~ y)));
+}
+```
+
+## byteswap
+
+- 交换第n，m字节
+- 示例：byteSwap(0x12345678,1,3) = 0x56341278
+- 说明：0 <= n <= 3, 0 <= m <= 3
+- 限制操作：! ~ & ^ | + << >>
+- 操作数量：25
+- 难度：2
+
+首先根据将0xff分别移8n,8m位，8n,8m可以通过将其移三位得到。得到MASK。
+
+然后可以用mask取出对应的值，然后移到最低位，再移到交换后的位置。
+
+~~~c
+long byteswap(long x,long n,long m){
+  long MASK_n=0xff<<(n<<8);
+  long MASK_m=0xff<<(m<<8);
+  return ((((x&MASK_m)>>(m<<8))<<(n<<8))|(((x&MASK_n)>>(n<<8))<<(m<<8))|(x&~(MASK_m|MASK_n)));
+}
+~~~
+
+## conditional
+
+- 实现`x?y:z`
+- 示例：conditional(2,4,5) = 4
+- 限制操作：! ~ & ^ | + << >>
+- 操作数量：16
+- 难度：3计算`x`逻辑右移`n`位
 

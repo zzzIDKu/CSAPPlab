@@ -202,3 +202,23 @@ long bitReverse(long x){
   long Reverse_64b=((Reverse_32b&MASK_6)<<32)|((Reverse_32b>>32)&MASK_6);
   return Reverse_64b;
 }
+/* - 使用`~`和`&`实现`x^y`
+- 示例：bitNor(0x4,0x5) = 0x1
+- 限制操作：~ &
+- 操作数量：14
+- 难度：1 */
+long bitXor(long x,long y){
+  return ~((~(~ x&y))&(~(x&~ y)));
+}
+
+/* 交换第n，m字节
+示例：byteSwap(0x12345678,1,3) = 0x56341278
+说明：0 <= n <= 3, 0 <= m <= 3
+限制操作：! ~ & ^ | + << >>
+操作数量：25
+难度：2 */
+long byteswap(long x,long n,long m){
+  long MASK_n=0xff<<(n<<8);
+  long MASK_m=0xff<<(m<<8);
+  return ((((x&MASK_m)>>(m<<8))<<(n<<8))|(((x&MASK_n)>>(n<<8))<<(m<<8))|(x&~(MASK_m|MASK_n)));
+}
