@@ -222,3 +222,12 @@ long byteswap(long x,long n,long m){
   long MASK_m=0xff<<(m<<8);
   return ((((x&MASK_m)>>(m<<8))<<(n<<8))|(((x&MASK_n)>>(n<<8))<<(m<<8))|(x&~(MASK_m|MASK_n)));
 }
+/* - 实现`x?y:z`
+- 示例：conditional(2,4,5) = 4
+- 限制操作：! ~ & ^ | + << >>
+- 操作数量：16
+- 难度：3 */
+long conditional(long x, long y,long z){
+  long temp=((!!x)<<63)>>63;
+  return (temp&y)|((~temp)z);
+}

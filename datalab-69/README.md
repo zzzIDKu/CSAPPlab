@@ -514,5 +514,31 @@ long byteswap(long x,long n,long m){
 - 示例：conditional(2,4,5) = 4
 - 限制操作：! ~ & ^ | + << >>
 - 操作数量：16
-- 难度：3计算`x`逻辑右移`n`位
+- 难度：3
+
+$$
+!!x=\begin{cases}
+&1,&x\neq0\\
+&0,&x=0
+\end{cases}
+$$
+
+
+$$
+((!!x)<<63)>>63=\begin{cases}
+&1...1,&x\neq0\\
+&0...0,&x=0
+\end{cases}
+$$
+
+~~~c
+long conditional(long x, long y,long z){
+  long temp=((!!x)<<63)>>63;
+  return (temp&y)|((~temp)z);
+}
+~~~
+
+
+
+
 
