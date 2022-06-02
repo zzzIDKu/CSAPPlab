@@ -231,3 +231,18 @@ long conditional(long x, long y,long z){
   long temp=((!!x)<<63)>>63;
   return (temp&y)|((~temp)z);
 }
+/* 将二进制数所有位的数置为最低位数
+示例：copyLSB(6) = 0x00000000
+限制操作：! ~ & ^ | + << >>
+操作数量：5
+难度：2 */
+long copyLSB(long x){
+  return (x<<63)>>63;
+}
+/* 判断 x != -x ，满足返回1，反之。
+限制操作：! ~ & ^ | +
+操作数量：5
+难度：2 */
+long distinctNegation(long x){
+  return x^(~x+1);
+}

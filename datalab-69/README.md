@@ -538,7 +538,36 @@ long conditional(long x, long y,long z){
 }
 ~~~
 
+## copyLSB
 
+- 将二进制数所有位的数置为最低位数
+- 示例：copyLSB(6) = 0x00000000
+- 限制操作：! ~ & ^ | + << >>
+- 操作数量：5
+- 难度：2
 
+先左移到符号位，再右移到最低为即可。
 
+~~~c
+long copyLSB(long x){
+  return (x<<63)>>63;
+}
+~~~
+
+## distinctNegation
+
+- 判断 `x != -x` ，满足返回1，反之。
+- 限制操作：! ~ & ^ | +
+- 操作数量：5
+- 难度：2
+
+对于二进制补码，只有最小值`x=-x`，其余均不相等。
+
+判断是否相等显然可以用异或运算。
+
+~~~c
+long distinctNegation(long x){
+  return x^(~x+1);
+}
+~~~
 
