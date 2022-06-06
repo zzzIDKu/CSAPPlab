@@ -246,3 +246,12 @@ long copyLSB(long x){
 long distinctNegation(long x){
   return x^(~x+1);
 }
+/* 计算x/(2^n)，divpwr2
+说明：0 <= n <= 30
+示例：dividePower2(-33,4) = -2
+限制操作：! ~ & ^ | + << >>
+操作数量：15
+难度：2 */
+long divpwr2(long x,long n){
+  return (x+(x>>63)&(1<<n+~1))>>n;
+}
